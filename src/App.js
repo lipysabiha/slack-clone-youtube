@@ -1,6 +1,4 @@
-import React from 'react';
-// import logo from './logo.svg';
-// import { Counter } from './features/counter/Counter';
+import React, { useState } from 'react';
 import './App.css';
 import {
     BrowserRouter as Router,
@@ -10,31 +8,40 @@ import {
 import Header from "./components/Header";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
-import Chat from './components/Chat';
-
+import Chat from "./components/Chat";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from './firebase';
+import Login from "./components/Login";
 
 function App() {
+  const [user, loading] = useState(auth);
+
   return (
     <div className="app">
       <Router>
-        <>
-          <Header/>
-            <AppBody>
-              <Sidebar/>
-                <Switch>
-                  <Route path="/" exact>
-                    {/* Chat */}
-                    <Chat />
-                  </Route>
-                </Switch>
-            </AppBody>
-        </>
+        {!user ? ( 
+          <Login />
+          ): ( 
+          <>
+            <Header />
+              <AppBody>
+                <Sidebar />
+                  <Switch>
+                    <Route path="/" exact>
+                      {/* Chat */}
+                      <Chat />
+                    </Route>
+                  </Switch>
+              </AppBody>
+          </>
+        )}
+
       </Router>
     </div>
   );
 }
 
-export default App
+export default App;
 
 const AppBody = styled.div`
   display: flex;

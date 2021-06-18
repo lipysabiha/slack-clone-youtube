@@ -1,11 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 import { db } from "../firebase";
 import firebase from 'firebase';
 
-function ChatInput({channelName, channelId}) {
+function ChatInput({channelName, channelId, chatRef}) {
     const [input, setInput] = useState("");
+    console.log(channelId);
 
     const sendMessage = (e) => {
         e.preventDefault(); //Prevents refresh
@@ -20,8 +21,12 @@ function ChatInput({channelName, channelId}) {
             user: 'Slack',
             userImage: "https://images.pexels.com/photos/5417837/pexels-photo-5417837.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
 
-                // "https://pbs.twimg.com/profile_image/1339192504382590976/2WxMn8cm_400*4000.jpg"
+            // userImage: "https://pbs.twimg.com/profile_image/1339192504382590976/2WxMn8cm_400*4000.jpg",
 
+        });
+
+        chatRef.current.scrollIntoView({
+            behavior: "smooth",
         });
 
         setInput("");
@@ -33,7 +38,7 @@ function ChatInput({channelName, channelId}) {
                 <input 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder={`Message #ROOM`}
+                placeholder={`Message #${channelName}`}
                 />
                 <Button hidden type='submit' onClick={sendMessage}>
                     SEND
@@ -67,4 +72,3 @@ const ChatInputContainer = styled.div`
         display: none !important;
     }
 `;
-``

@@ -23,7 +23,7 @@ function SidebarOption({Icon, title, addChannelOption, id}) {
             dispatch(
                 enterRoom({
                 roomId: id,
-                }),
+                })
             );
         }
     };
@@ -32,7 +32,7 @@ function SidebarOption({Icon, title, addChannelOption, id}) {
         <SidebarOptionContainer
             onClick = {addChannelOption ? addChannel : selectChannel}
         >
-            {Icon && <Icon fontSize='small' style={{ padding: 10 }} />}
+            {Icon && <Icon fontSize="small" style={{ padding: 10 }} />}
             {Icon ? (
                 <h3>{title}</h3>
             ) : (
