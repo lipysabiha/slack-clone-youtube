@@ -20,10 +20,10 @@ function Chat() {
     const [roomMessages, loading] = useCollectionData (
         roomId &&
         db
-            .collection('room')
-            .doc(roomId)
-            .collection("messages")
-            .orderedBy("timestamp", "asc")
+         .collection('room')
+         .doc(roomId)
+         .collection("messages")
+         .orderedBy("timestamp", "asc")
     );
 
     useEffect(() => {

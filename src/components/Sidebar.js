@@ -15,10 +15,12 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SidebarOption from "./SidebarOption";
 import AddIcon from "@material-ui/icons/Add";
 import {useCollection} from "react-firebase-hooks/firestore";
-import {db} from "../firebase";
+import {auth, db} from "../firebase";
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Sidebar() {
-    const [channels, loading, error] = useCollection(db.collection('room'));
+    const [channels] = useCollection(db.collection('room'));
+    const [user] = useAuthState(auth);
 
     return (
         <SidebarContainer>
@@ -27,7 +29,7 @@ function Sidebar() {
                     <h2>MzTech</h2>
                     <h3>
                         <FiberManualRecordIcon />
-                        Sonny Sangha
+                        Umme Sabiha Lipy
                     </h3>
                 </SidebarInfo>
                     <CreateIcon />

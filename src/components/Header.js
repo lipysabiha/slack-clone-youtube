@@ -4,26 +4,31 @@ import {Avatar} from "@material-ui/core";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import SearchIcon from "@material-ui/icons/Search";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 
 function Header() {
+    const [user] = useAuthState(auth);
+
     return(
         <HeaderContainer>
-            
-            {/* Header Left */}
+
             <HeaderLeft>
-                <HeaderAvatar/>
-                <AccessTimeIcon/>
+                <HeaderAvatar
+                 onClick ={() => auth.signOut()}
+                 alt={user?.displayName}
+                 src={user?.photoURL}
+                />
+                <AccessTimeIcon />
             </HeaderLeft>
 
-            {/* Header Search */}
             <HeaderSearch>
-                <SearchIcon/>
+                <SearchIcon />
                     <input placeholder="Search PAPAFAM" />
             </HeaderSearch>
 
-            {/* Header Right */}
             <HeaderRight>
-                <HelpOutlineIcon/>
+                <HelpOutlineIcon />
             </HeaderRight>
 
         </HeaderContainer>
